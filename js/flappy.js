@@ -3,11 +3,14 @@ var width = 790;
 var height = 400;
 var gravityValue = 800;
 var gameSpeed = -300;
+var gapSize = 100;
+var gapMargin = 50;
+var blockHeight = 50;
 //Setup phaser
 var stateActions = { preload: preload, create: create, update: update };
 var game = new Phaser.Game(width, height, Phaser.AUTO, 'game', stateActions);
 //Initialise variables
-var score = 0;
+var score = -1;
 var labelScore;
 var player;
 var pipes = [];
@@ -32,11 +35,15 @@ function create() {
   player.body.gravity.y = gravityValue;
   //Add music
   song = game.add.audio('song');
+  song.play('',0,1,true);
+  song.pause();
+  //Colour the background
   game.stage.setBackgroundColor("#124376");
   //Add score
   labelScore = game.add.text(20, 20, "0");
   //Add control
   game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).onDown.add(playerJump);
+  game.input.keyboard.addKey(Phaser.Keyboard.P).onDown.add(pause);
   //Add pipes
   generatePipe();
   var pipeInterval = 1.75 * Phaser.Timer.SECOND;
@@ -57,10 +64,6 @@ function update() {
   game.physics.arcade.enable(tail);
   tail.body.velocity.x = gameSpeed;
   tail.body.gravity.y = gravityValue/2;
-  //Make song loop
-  if(!song.isPlaying){
-    song.play();
-  }
   //Rotate player to face direction of travel
   player.rotation = Math.atan(player.body.velocity.y / 200);
 }
@@ -71,16 +74,14 @@ function changeScore() {
 }
 //Generate pipe
 function generatePipe() {
-  //Random gap
-  var gap = game.rnd.integerInRange(1 ,5);
-  //Loop 8 times
-  for (var count = 0; count < 8; count++) {
-    //Only generate pipes where there is no gap
-    if (count != gap && count != gap+1) {
-      addPipeBlock(790, count * 50);
-    }
+  //Start of gap
+  var gapStart = game.rnd.integerInRange(gapMargin, height-gapSize-gapMargin);
+  for(var topCount=gapStart;topCount>0;topCount-=blockHeight){
+    addPipeBlock(width,topCount-blockHeight);
   }
-  //Add one to score for every pipe
+  for(var bottomCount=gapStart+gapSize;bottomCount<height;bottomCount+=blockHeight) {
+    addPipeBlock(width, bottomCount);
+  }
   changeScore();
 }
 //Add pipe
@@ -97,8 +98,16 @@ function playerJump() {
   //Make it jump
   player.body.velocity.y = gameSpeed;
   //Increase the incessant wailing
-  song.volume += 0.1;
+  song.volume += 0.5;
+  if(song.isPlaying){
+    song.pause();
+  } else{
+    song.resume();
+  }
 }
 function gameOver() {
   location.reload();
+}
+function pause(){
+  game.paused = !game.paused;
 }
