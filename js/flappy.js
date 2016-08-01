@@ -14,6 +14,10 @@ var score;
 score = 0;
 var labelScore;
 var player;
+var up;
+var down;
+var left;
+var right;
 /*
  * Loads all resources for the game and gives them names.
  */
@@ -34,20 +38,32 @@ function create() {
   game.add.sprite(10, 360, "playerImg");
   //game.input.onDown.add(clickHandler);
   game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).onDown.add(spaceHandler);
-  alert(score);
+  //alert(score);
   labelScore = game.add.text(20, 20, "0");
   player = game.add.sprite(100, 200, "playerImg");
-  game.input.keyboard.addKey(Phaser.Keyboard.RIGHT).onDown.add(moveRight);
+  /*game.input.keyboard.addKey(Phaser.Keyboard.RIGHT).onDown.add(moveRight);
   game.input.keyboard.addKey(Phaser.Keyboard.LEFT).onDown.add(moveLeft);
   game.input.keyboard.addKey(Phaser.Keyboard.UP).onDown.add(moveUp);
-  game.input.keyboard.addKey(Phaser.Keyboard.DOWN).onDown.add(moveDown);
+  game.input.keyboard.addKey(Phaser.Keyboard.DOWN).onDown.add(moveDown);*/
+  right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+  left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+  up = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+  down = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
 }
 
 /*
  * This function updates the scene. It is called for every new frame.
  */
 function update() {
-
+  if(right.isDown){
+    player.x += 1;
+  } else if(left.isDown){
+    player.x -= 1;
+  } else if(up.isDown){
+    player.y -= 1;
+  } else if(down.isDown){
+    player.y += 1;
+  }
 }
 function clickHandler(event) {
   game.add.sprite(event.x-15, event.y-15, "playerImg");
@@ -59,7 +75,7 @@ function changeScore() {
 	score = score + 1;
   labelScore.setText(score.toString());
 }
-function moveRight() {
+/*function moveRight() {
 	player.x += 10;
 }
 function moveLeft() {
@@ -70,4 +86,4 @@ function moveUp() {
 }
 function moveDown() {
 	player.x += 10;
-}
+}*/
