@@ -46,11 +46,14 @@ function update() {
   //Check if keys are down and moves respondingly
   if(right.isDown){
     player.x += 1;
-  } else if(left.isDown){
+  }
+  if(left.isDown){
     player.x -= 1;
-  } else if(up.isDown){
+  }
+  if(up.isDown){
     player.y -= 1;
-  } else if(down.isDown){
+  }
+  if(down.isDown){
     player.y += 1;
   }
   if(space.isDown){
