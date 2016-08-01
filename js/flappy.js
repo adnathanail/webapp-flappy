@@ -45,24 +45,32 @@ function create() {
 function update() {
   //Check if keys are down and moves respondingly
   if(right.isDown){
-    player.x += 1;
+    if(player.x < 760){
+      player.x += 1;
+      game.add.sprite(player.x, player.y, "playerImg");
+    }
   }
   if(left.isDown){
-    player.x -= 1;
+    if(player.x >= 0){
+      player.x -= 1;
+      game.add.sprite(player.x, player.y, "playerImg");
+    }
   }
   if(up.isDown){
-    player.y -= 1;
+    if(player.y >= 0){
+      player.y -= 1;
+      game.add.sprite(player.x, player.y, "playerImg");
+    }
   }
   if(down.isDown){
-    player.y += 1;
+    if(player.y < 370){
+      player.y += 1;
+      game.add.sprite(player.x, player.y, "playerImg");
+    }
   }
   if(space.isDown){
     game.sound.play("score");
   }
-}
-//Put a picture where the player clicks
-function clickHandler(event) {
-  game.add.sprite(event.x-15, event.y-15, "playerImg");
 }
 //Plays a sound when you clikc space
 function spaceHandler() {
