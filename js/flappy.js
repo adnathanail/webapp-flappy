@@ -14,6 +14,7 @@ var right;
 var space;
 //Setup pipes variable
 var pipes = [];
+var song;
 //Stuff that is needed to be loaded
 function preload() {
   //Load a picture call it playerImg
@@ -21,11 +22,19 @@ function preload() {
   game.load.image("tail", "../assets/tail.png");
   //Load a sound call it score
   game.load.audio("score", "../assets/point.ogg");
+  game.load.audio("song", "../assets/nyansong.ogg");
   //Load a pipe image
   game.load.image("pipeBlock","../assets/pipe.png");
 }
 //Stuff that is run once at the start
 function create() {
+  //music = new Phaser.Sound(game,'song',1,true);
+  //music.play();
+  //song = new Sound(game,"song");
+  song = game.add.audio('song');
+  song.loop = true;
+  song.play();
+  //song.loopFull(0.6);
   //Set the background colour
   game.stage.setBackgroundColor("#F3D3A3");
   //Print some text
@@ -52,15 +61,19 @@ function create() {
 //Continually runs throughout the game
 function update() {
   game.physics.arcade.overlap(player,pipes,gameOver);
+  if(player.x > 400){
+    gameOver();
+  }
   var tail = game.add.sprite(player.x+5,player.y+5,"tail");
   //tail.scale.setTo(0.1, 0.1);
   game.physics.arcade.enable(tail);
   tail.body.velocity.x = -300;
+  tail.body.gravity.y = 400;
 }
 function changeScore() {
 	score = score + 1;
 	labelScore.setText(score.toString());
-  game.sound.play("score");
+  //game.sound.play("score");
 }
 function generatePipe() {
   var gap = game.rnd.integerInRange(1 ,5);
