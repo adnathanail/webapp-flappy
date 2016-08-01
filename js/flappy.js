@@ -1,49 +1,33 @@
 //Setup phaser
 var stateActions = { preload: preload, create: create, update: update };
 var game = new Phaser.Game(790, 400, Phaser.AUTO, 'game', stateActions);
-//Setup score variables
+//Setup variables
 var score;
 score = 0;
 var labelScore;
-//Setup movement variables
 var player;
 var up;
 var down;
 var left;
 var right;
 var space;
-//Setup pipes variable
 var pipes = [];
 var song;
 //Stuff that is needed to be loaded
 function preload() {
-  //Load a picture call it playerImg
+  //Load pictures
   game.load.image("playerImg", "../assets/nyan.png");
   game.load.image("tail", "../assets/tail.png");
-  //Load a sound call it score
+  game.load.image("pipeBlock","../assets/pipe_pink.png");
+  //Load sounds
   game.load.audio("score", "../assets/point.ogg");
   game.load.audio("song", "../assets/nyansong.ogg");
-  //Load a pipe image
-  game.load.image("pipeBlock","../assets/pipe.png");
 }
 //Stuff that is run once at the start
 function create() {
-  //music = new Phaser.Sound(game,'song',1,true);
-  //music.play();
-  //song = new Sound(game,"song");
+  //Add music
   song = game.add.audio('song');
-  song.loop = true;
-  song.play();
-  //song.loopFull(0.6);
-  //Set the background colour
-  game.stage.setBackgroundColor("#F3D3A3");
-  //Print some text
-  game.add.text(150, 160, "FLAPPY NYAN!",{font: "50px Courier", fill: "#9B9B9B"});
-  //Put james bond in all four corners
-  //game.add.sprite(10, 10, "playerImg");
-  game.add.sprite(750, 10, "playerImg");
-  game.add.sprite(750, 360, "playerImg");
-  game.add.sprite(10, 360, "playerImg");
+  game.stage.setBackgroundColor("#124376");
   //Print 0 the the screen as a quasi-score
   labelScore = game.add.text(20, 20, "0");
   //Print a player
@@ -61,7 +45,7 @@ function create() {
 //Continually runs throughout the game
 function update() {
   game.physics.arcade.overlap(player,pipes,gameOver);
-  if(player.x > 400){
+  if(player.y > 350 || player.y < 0){
     gameOver();
   }
   var tail = game.add.sprite(player.x+5,player.y+5,"tail");
@@ -69,6 +53,9 @@ function update() {
   game.physics.arcade.enable(tail);
   tail.body.velocity.x = -300;
   tail.body.gravity.y = 400;
+  if(!song.isPlaying){
+    song.play();
+  }
 }
 function changeScore() {
 	score = score + 1;
@@ -94,6 +81,8 @@ function addPipeBlock(x, y) {
 }
 function playerJump() {
     player.body.velocity.y = -300;
+    song.volume += 0.1;
+    console.log(song.volume);
 }
 function gameOver() {
     location.reload();
