@@ -77,7 +77,7 @@ var playState = {
     player.bringToTop();
     game.physics.arcade.enable(tail);
     tail.body.velocity.x = gameSpeed;
-    tail.body.gravity.y = gravityValue/2;
+    tail.body.gravity.y = gravityValue/4;
     //Rotate player to face direction of travel
     player.rotation = Math.atan(player.body.velocity.y / 200);
   }
@@ -138,6 +138,7 @@ function playerJump() {
   }
 }
 function gameOver() {
+  registerScore(score);
   game.state.start('lose');
 }
 function pause(){

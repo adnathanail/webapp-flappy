@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flappy Birdy!</title>
+  <link rel="stylesheet" href="../assets/style.css"/>
+  <link rel="stylesheet" href="../lib/bootstrap.css"/>
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Flappy Birdy!</h1>
+      <p>Welcome to Flappy Bird.</p>
+    </div>
+  </div>
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="active" id="scores"><a href="#">Scores</a></li>
+    <li role="presentation" id="creds"><a href="#">Credits</a></li>
+    <li role="presentation" id="help"><a href="#">Help</a></li>
+  </ul>
+  <div id="that">
+    <p>The highest scorers are:</p>
+    <ul>
+      <li class="gold">Me</li>
+      <li class="score">Myself</li>
+      <li class="score">I</li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <img src="../assets/screenshotStart.png" class="img-circle img-responsive" />
+    </div>
+    <div class="col-md-4">
+      <p id="gameLink">
+        <a href="example.html">
+          <img src="../assets/screenshot.png" class="img-responsive" />    1
+        </a>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <img src="../assets/screenshotOver.png" class="img-thumbnail img-responsive" />
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <div id="game"> </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="../lib/phaser.min.js"></script>
+  <script type="text/javascript" src="../js/flappy.js"></script>
+  <script type="text/javascript" src="../lib/jquery.js"></script>
+  <script type="text/javascript" src="../js/interactivity.js"></script>
+</body>
+</html>
