@@ -21,7 +21,7 @@ $("#help").on("click",function(){
 function registerScore(score){
   if(score > Math.max(scoreNums)){
     var playerName = prompt("What's your name?");
-    var scoreEntry = "<li>" + playerName + ":" + score.toString() + "</li>";
+    var scoreEntry = "<li>" + playerName + ": " + score.toString() + "</li>";
     scores.push(scoreEntry);
     scoreNums.push(score);
     if($("#scores").hasClass('active')){
