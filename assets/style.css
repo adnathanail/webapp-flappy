@@ -4,6 +4,7 @@ h1 {
   font-style: italic;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
 .score {
   color: gray;
 }
@@ -15,4 +16,22 @@ h1 {
 #gameLink {
     text-align: center;
     border: 1px solid gray;
+}
+
+body{
+  background-color:#124376 !important;
+}
+
+body div.container div.jumbotron{
+  background-color:#FD9CFD !important;
+}
+body div.container div.row ul.nav-tabs{
+  border-bottom: 1px solid #FD9CFD;
+}
+body div.container div.row div#that{
+  color: #FD9CFD;
+}
+body div.container div.row ul.nav-tabs li.active a{
+  background-color:#FD9CFD !important;
+  border: 1px solid #FD9CFD;
 }

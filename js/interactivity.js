@@ -4,7 +4,7 @@ $("#scores").on("click",function(){
   $('li').removeClass('active');
   $(this).addClass("active");
   $("#that").empty();
-  $("#that").append('<p>The highest scorers are:</p><ul></ul><script>for(i=0;i<scores.length;i++){$("#that ul").append("<li>"+scores[i]+"</li>")}</script>');
+  $("#that").append('<p>The highest scorers are:</p><ul></ul><script>for(i=0;i<scores.length;i++){$("#that ul").append(scores[i])}</script>');
 });
 $("#creds").on("click",function(){
   $('li').removeClass('active');
