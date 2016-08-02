@@ -4,7 +4,7 @@ $("#scores").on("click",function(){
   $('li').removeClass('active');
   $(this).addClass("active");
   $("#that").empty();
-  $("#that").append('<p>The highest scorers are:</p><ul></ul><script>for(i=0;i<scores.length;i++){$("#that ul").append(scores[i])}$("#that").append(\'<a href="#" id="sharing">Share your score on Twitter</a><script>$("#sharing").on("click", function(){var text="I scored "+score.toString()+" in Flappy Nyan! Can you do better?";var escapedText=encodeURIComponent(text);var url ="https:twitter.com/share?text="+escapedText;window.location = url;});</script>\');</script>');
+  $("#that").append('<p>The highest scorers are:</p><ul></ul><script>for(i=0;i<scores.length;i++){$("#that ul").append(scores[i])}$("$that").load(function(){$("#that").append(\'<a href="#" id="sharing">Share your score on Twitter</a><script>$("#sharing").on("click", function(){var text="I scored "+score.toString()+" in Flappy Nyan! Can you do better?";var escapedText=encodeURIComponent(text);var url ="https:twitter.com/share?text="+escapedText;window.location = url;});\');});</script>');
 });
 $("#creds").on("click",function(){
   $('li').removeClass('active');
