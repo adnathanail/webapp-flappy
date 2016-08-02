@@ -24,7 +24,8 @@ var loadState = {
     //Load pictures
     game.load.image("playerImg", "../assets/nyan.png");
     game.load.image("tail", "../assets/tail.png");
-    game.load.image("pipeBlock","../assets/pipe_pink.png");
+    game.load.image("pipeBlock","../assets/pipe2-body.png");
+    game.load.image("pipeEnd","../assets/pipe2-end.png");
     game.load.image("mute","../assets/mute.png");
     //Load sounds
     game.load.audio("song", "../assets/nyansong.ogg");
@@ -61,7 +62,7 @@ var playState = {
     game.input.keyboard.addKey(Phaser.Keyboard.P).onDown.add(pause);
     //Add pipes
     generatePipe();
-    var pipeInterval = 1.75 * Phaser.Timer.SECOND;
+    var pipeInterval = 2 * Phaser.Timer.SECOND;
     game.time.events.loop(pipeInterval,generatePipe);
     //Change player anchor for rotation
     player.anchor.setTo(0.5, 0.5);
@@ -106,18 +107,31 @@ function changeScore() {
 function generatePipe() {
   //Start of gap
   var gapStart = game.rnd.integerInRange(gapMargin, height-gapSize-gapMargin-100);
-  for(var topCount=gapStart;topCount>-100;topCount-=blockHeight){
+  for(var topCount=gapStart;topCount>-(2*blockHeight);topCount-=blockHeight){
     addPipeBlock(width,topCount-blockHeight);
   }
+  addPipeEnd(width-2,gapStart);
   for(var bottomCount=gapStart+gapSize;bottomCount<height;bottomCount+=blockHeight) {
     addPipeBlock(width, bottomCount);
   }
+  addPipeEnd(width-2,gapStart+gapSize);
   changeScore();
 }
 //Add pipe
 function addPipeBlock(x, y) {
   //Create pipe block
   var block = game.add.sprite(x,y,"pipeBlock");
+  //Add pipe block to pipes array
+  pipes.push(block);
+  //Add physics to pipes
+  game.physics.arcade.enable(block);
+  block.body.velocity.x = gameSpeed;
+  block.body.velocity.y = 50;
+  game.time.events.loop(Phaser.Timer.SECOND, function(){block.body.velocity.y = -block.body.velocity.y;}, this);
+}
+function addPipeEnd(x, y) {
+  //Create pipe block
+  var block = game.add.sprite(x,y,"pipeEnd");
   //Add pipe block to pipes array
   pipes.push(block);
   //Add physics to pipes

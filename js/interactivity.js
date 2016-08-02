@@ -19,7 +19,7 @@ $("#help").on("click",function(){
   $("#that").append('Don\'t go insane!');
 });
 function registerScore(score){
-  if(score > Math.max(scoreNums)){
+  if(score > Math.max.apply(Math, scoreNums)){
     var playerName = prompt("What's your name?");
     var scoreEntry = "<li>" + playerName + ": " + score.toString() + "</li>";
     scores.push(scoreEntry);
