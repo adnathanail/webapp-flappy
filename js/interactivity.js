@@ -26,8 +26,12 @@ function registerScore(score){
     scoreNums.push(score);
     if($("#scores").hasClass('active')){
       $("#that ul").empty();
-      for(i=0;i<scores.length;i++){$("#that ul").append(scores[i]);}
-      $("#that").append('<a href="#" id="sharing">Share your score on Twitter</a><script>$("#sharing").on("click", function(){var text="I scored "+score.toString()+" in Flappy Nyan! Can you do better?";var escapedText=encodeURIComponent(text);var url ="https:twitter.com/share?text="+escapedText;window.location = url;});</script>');
+      for(i=0;i<scores.length;i++){
+        $("#that ul").append(scores[i]);
+      }
+      if(!$("#that #sharing").length){
+        $("#that").append('<a href="#" id="sharing">Share your score on Twitter</a><script>$("#sharing").on("click", function(){var text="I scored "+score.toString()+" in Flappy Nyan! Can you do better?";var escapedText=encodeURIComponent(text);var url ="https:twitter.com/share?text="+escapedText;window.location = url;});</script>');
+      }
     }
   }
 }

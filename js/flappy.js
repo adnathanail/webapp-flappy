@@ -51,7 +51,7 @@ var playState = {
     game.physics.arcade.enable(player);
     player.body.gravity.y = gravityValue;
     //Colour the background
-    game.stage.setBackgroundColor("#124376");
+    game.stage.setBackgroundColor(18,67,118);
     //Add 'mute' button
     mute = game.add.button(600, 10, 'mute', function(){song.volume += 1;}, this);
     //mute = new Phaser.Button(game, 200, 200, "mute", function(){song.volume += 1;},this);
@@ -154,7 +154,12 @@ function playerJump() {
 function gameOver() {
   registerScore(score);
   game.state.start('lose');
+  gravityValue = 800;
 }
 function pause(){
   game.paused = !game.paused;
+}
+function changeGravity(g) {
+    gameGravity += g;
+    player.body.gravity.y = gameGravity;
 }
