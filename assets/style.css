@@ -19,19 +19,23 @@ h1 {
 }
 
 body{
-  background-color:#124376 !important;
+  background-color:#FFD90F !important;
 }
 
 body div.container div.jumbotron{
-  background-color:#FD9CFD !important;
+  background-color:#D1B270 !important;
 }
 body div.container div.row ul.nav-tabs{
-  border-bottom: 1px solid #FD9CFD;
+  border-bottom: 1px solid #D1B270;
 }
 body div.container div.row div#that{
-  color: #FD9CFD;
+  color: #D1B270;
 }
 body div.container div.row ul.nav-tabs li.active a{
-  background-color:#FD9CFD !important;
-  border: 1px solid #FD9CFD;
+  background-color:#D1B270 !important;
+  border: 1px solid #D1B270;
+}
+body div.container div.row ul.nav-tabs li:not(.active) a:hover{
+  background-color:#4F76DF !important;
+  border: 1px solid #4F76DF;
 }
