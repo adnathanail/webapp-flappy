@@ -7,10 +7,10 @@ var gapSize = 100;
 var gapMargin = 50;
 var blockHeight = 50;
 //Initialise variables
-var score = -1;
+var score;
 var labelScore;
 var player;
-var pipes = [];
+var pipes;
 var song;
 var bootState = {
   create: function(){
@@ -29,6 +29,8 @@ var loadState = {
     //Load sounds
     game.load.audio("song", "../assets/nyansong.ogg");
     game.state.start('menu');
+    song = game.add.audio('song');
+    song.play('',0,1,true);
   }
 };
 var menuState = {
@@ -40,19 +42,17 @@ var menuState = {
 };
 var playState = {
   create: function(){
+    score = -1;
+    pipes = [];
     //Add player
     player = game.add.sprite((width/2)-15, (height/2)-15, "playerImg");
     //Add physics
     game.physics.arcade.enable(player);
     player.body.gravity.y = gravityValue;
-    //Add music
-    song = game.add.audio('song');
-    song.play('',0,1,true);
-    song.pause();
     //Colour the background
     game.stage.setBackgroundColor("#124376");
     //Add 'mute' button
-    mute = game.add.button(750, 10, 'mute', function(){song.volume += 1;}, this);
+    mute = game.add.button(600, 10, 'mute', function(){song.volume += 1;}, this);
     //mute = new Phaser.Button(game, 200, 200, "mute", function(){song.volume += 1;},this);
     //Add score
     labelScore = game.add.text(20, 20, "0");
